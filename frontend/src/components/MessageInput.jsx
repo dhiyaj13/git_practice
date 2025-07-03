@@ -1,36 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-function MessageInput({ messages, setMessages }) {
-  const [newMessage, setNewMessage] = useState('');
-
-  const handleSend = () => {
-    if (!newMessage.trim()) return;
-    const newMsg = {
-      id: messages.length + 1,
-      sender: 'You',
-      content: newMessage.trim(),
-    };
-    setMessages([...messages, newMsg]);
-    setNewMessage('');
+const MessageInput = ({ newMessage, onChange, onSend }) => {
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') onSend();
   };
 
   return (
-    <div className="p-4 border-t flex gap-2 bg-white">
+    <div className="p-4 border-t bg-white flex items-center gap-2">
       <input
         type="text"
         placeholder="Type a message..."
         value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        className="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
+        onChange={(e) => onChange(e.target.value)}
+        onKeyDown={handleKeyDown}
+        className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-400"
       />
       <button
-        onClick={handleSend}
-        className="px-5 py-2 bg-indigo-500 text-white rounded-lg hover:bg-indigo-600 transition"
+        onClick={onSend}
+        className="px-5 py-2 bg-indigo-500 text-white rounded-full hover:bg-indigo-600 transition"
       >
         Send
       </button>
     </div>
   );
-}
+};
 
 export default MessageInput;
