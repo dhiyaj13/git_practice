@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Sidebar = ({ users, selectedUser, onSelectUser }) => {
+const Sidebar = ({ users = [], selectedUser, onSelectUser }) => {
   return (
     <aside className="w-full sm:w-1/4 bg-white border-r p-4">
       <h2 className="text-lg font-bold text-indigo-600 mb-4">Contacts</h2>
